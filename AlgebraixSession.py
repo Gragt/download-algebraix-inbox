@@ -11,4 +11,18 @@ def downloadAlgebraixInbox():
     Inputs: none.
     Returns: nothing.
     """
-    pass
+    def openWebBrowser():
+        """
+        Opens the web browser and go to the Algebraix homepage.
+        Inputs: none.
+        Returns: none.
+        """
+        browser = webdriver.Firefox()
+        browser.get('https://c1-liceodelvalle.algebraix.com/')
+
+    """
+    print("Opening web browser …")
+    openWebBrowser()
+    print("Web browser open. Please, manually log into Algebraix.")
+    print("All done.")
+    """
