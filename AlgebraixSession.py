@@ -25,6 +25,17 @@ class AlgebraixSession(object):
         self.senderName = self.browser.find_element_by_class_name(
             'material-card__text--primary').text
 
+    def replaceSenderName(self, names={}):
+        """
+        Checks if a name belongs to a parent and substitute it for the
+        student’s name.
+        Inputs: names, a dictionary (string: list of strings)
+        Returns: nothing.
+        """
+        for student, v in names.items():
+            if self.senderName in v[1]:
+                self.senderName = student
+
     def setBodyText(self):
         """
         Finds and sets the current message’s body text.
@@ -55,8 +66,8 @@ class AlgebraixSession(object):
         """
         self.targetPath = os.path.expanduser(
             os.path.join(
-                '~', 'Downloads', 'AlgebraixInbox', self.senderName.replace(
-                    " ", "")))
+                '~', 'Downloads', 'AlgebraixInbox',
+                self.senderName.replace(" ", "")))
         os.makedirs(self.targetPath, exist_ok=True)
 
     def downloadFiles(self):
