@@ -85,3 +85,15 @@ class AlgebraixSession(object):
             for chunk in res.iter_content(10000):
                 file.write(chunk)
             file.close()
+
+    def findNext(self):
+        """
+        Finds and returns the link to the next message. Returns False if it is
+        the last message.
+        Returns: a Selenium object or a Boolean value.
+        """
+        links = self.browser.find_elements_by_class_name('X_LOAD.action-item')
+        for link in links:
+            if link.get_attribute('data-original-title') == 'Next':
+                return link
+        return False
