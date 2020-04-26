@@ -18,43 +18,45 @@ class AlgebraixSession(object):
         self.browser = webdriver.Firefox()
         self.browser.get('https://c1-liceodelvalle.algebraix.com/')
 
-    def getSenderName(self):
+    def setSenderName(self):
         """
-        Finds and returns sender’s name for current message.
-        Returns: a string.
+        Finds and sets the current message’s sender’s name.
+        Returns: nothing.
         """
-        return self.browser.find_element_by_class_name(
+        self.senderName = self.browser.find_element_by_class_name(
             'material-card__text--primary').text
 
-    def getBodyText(self):
+    def setBodyText(self):
         """
-        Finds and returns the current message’s body text.
-        Returns: a string.
+        Finds and sets the current message’s body text.
+        Returns: nothing.
         """
-        return self.browser.find_element_by_class_name(
+        self.bodyText = self.browser.find_element_by_class_name(
             'material-card__body--paragraph.' +
             'material-card__body--respect-lines.text-break'
         ).text
 
-    def getAttachments(self):
+    def setAttachments(self):
         """
-        Finds all image attachments of the current message and returns a list
+        Finds all of the current’s message image attachments and sets a list
         of their URLs.
-        Returns: a list of strings.
+        Returns: nothing.
         """
-        return [
+        self.attachments = [
             link.get_attribute('href')
             for link in self.browser.find_elements_by_tag_name('a')
             if any(ext in link.text for ext in ['.jpg', '.jpeg', '.png'])
         ]
 
-    def createDownloadDirectory(self, name):
+    def createDownloadDirectory(self):
         """
         Checks and create a directory tree to download files if it doesn’t
         already exists.
         Inputs: name: a string.
         Returns: nothing.
         """
-        targetPath = os.path.expanduser(os.path.join(
-            '~', 'Downloads', 'AlgebraixInbox', name.replace(" ", "")))
-        os.makedirs(targetPath, exists_ok=True)
+        self.targetPath = os.path.expanduser(
+            os.path.join(
+                '~', 'Downloads', 'AlgebraixInbox', self.senderName.replace(
+                    " ", "")))
+        os.makedirs(self.targetPath, exists_ok=True)
