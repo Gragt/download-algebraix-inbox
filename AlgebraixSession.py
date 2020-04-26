@@ -6,9 +6,9 @@ from selenium import webdriver
 
 class AlgebraixSession(object):
     """
-    Opens a web browser through Selenium and navigates through the Algebraix
-    inbox, for each message creating a folder in ~/Downloads/ named after the
-    sender and saving all attachments in it.
+    An Algebraix Session launches and controls a web browser with Selenium. It
+    provides methods to interact with the Algebraix inbox, set up directories
+    in the user’s Downloads directory, and downloads the file attachments.
     """
 
     def __init__(self):
@@ -52,7 +52,6 @@ class AlgebraixSession(object):
         """
         Checks and create a directory tree to download files if it doesn’t
         already exists.
-        Inputs: name: a string.
         Returns: nothing.
         """
         self.targetPath = os.path.expanduser(
@@ -65,7 +64,6 @@ class AlgebraixSession(object):
         """
         Downloads and saves the current message’s body text and image
         attachments. Appends the message number at the start of the name.
-        Inputs: attach: a list of strings.
         Returns: nothing.
         """
         n = 1
