@@ -59,7 +59,7 @@ class AlgebraixSession(object):
             os.path.join(
                 '~', 'Downloads', 'AlgebraixInbox', self.senderName.replace(
                     " ", "")))
-        os.makedirs(self.targetPath, exists_ok=True)
+        os.makedirs(self.targetPath, exist_ok=True)
 
     def downloadFiles(self):
         """
@@ -69,10 +69,10 @@ class AlgebraixSession(object):
         Returns: nothing.
         """
         n = 1
-        while os.path.join(self.targetPath, f'{n:02}.txt').is_file():
+        while os.path.isfile(os.path.join(self.targetPath, f'{n:02}.txt')):
             n += 1
 
-        file = open(os.path.join(self.targetPath, f'{n:02}.txt'), 'wb')
+        file = open(os.path.join(self.targetPath, f'{n:02}.txt'), 'w')
         file.write(self.bodyText)
         file.close()
 
