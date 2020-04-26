@@ -60,3 +60,28 @@ class AlgebraixSession(object):
                 '~', 'Downloads', 'AlgebraixInbox', self.senderName.replace(
                     " ", "")))
         os.makedirs(self.targetPath, exists_ok=True)
+
+    def downloadFiles(self):
+        """
+        Downloads and saves the current message’s body text and image
+        attachments. Appends the message number at the start of the name.
+        Inputs: attach: a list of strings.
+        Returns: nothing.
+        """
+        n = 1
+        while os.path.join(self.targetPath, f'{n:02}.txt').is_file():
+            n += 1
+
+        file = open(os.path.join(self.targetPath, f'{n:02}.txt'), 'wb')
+        file.write(self.bodyText)
+        file.close()
+
+        for link in self.attachments:
+            k = 1
+            res = requests.get(link)
+            res.raise_for_status()
+            file = open(os.path.join(
+                self.targetPath, f'{n:02}_{k:02}.jpg'), 'wb')
+            for chunk in res.iter_content(10000):
+                file.write(chunk)
+            file.close()
