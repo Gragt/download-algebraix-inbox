@@ -96,3 +96,10 @@ class AlgebraixSession(object):
             if link.get_attribute('data-original-title') == 'Next':
                 return link
         return False
+
+    def browserClose(self):
+        """
+        Closes the web browser.
+        Returns: nothing.
+        """
+        self.browser.close()
