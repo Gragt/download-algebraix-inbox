@@ -1,5 +1,6 @@
 import os
 
+import requests
 from selenium import webdriver
 
 
@@ -24,6 +25,16 @@ class AlgebraixSession(object):
         """
         return self.browser.find_element_by_class_name(
             'material-card__text--primary').text
+
+    def getBodyText(self):
+        """
+        Finds and returns the current message’s body text.
+        Returns: a string.
+        """
+        return self.browser.find_element_by_class_name(
+            'material-card__body--paragraph.' +
+            'material-card__body--respect-lines.text-break'
+        ).text
 
     def getAttachments(self):
         """
