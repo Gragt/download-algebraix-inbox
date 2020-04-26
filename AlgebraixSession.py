@@ -47,3 +47,14 @@ class AlgebraixSession(object):
             for link in self.browser.find_elements_by_tag_name('a')
             if any(ext in link.text for ext in ['.jpg', '.jpeg', '.png'])
         ]
+
+    def createDownloadDirectory(self, name):
+        """
+        Checks and create a directory tree to download files if it doesn’t
+        already exists.
+        Inputs: name: a string.
+        Returns: nothing.
+        """
+        targetPath = os.path.expanduser(os.path.join(
+            '~', 'Downloads', 'AlgebraixInbox', name.replace(" ", "")))
+        os.makedirs(targetPath, exists_ok=True)
