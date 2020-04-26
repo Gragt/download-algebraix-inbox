@@ -19,8 +19,20 @@ class AlgebraixSession(object):
 
     def getSenderName(self):
         """
-        Finds and returns sender’s name.
+        Finds and returns sender’s name for current message.
         Returns: a string.
         """
         return self.browser.find_element_by_class_name(
             'material-card__text--primary').text
+
+    def getAttachments(self):
+        """
+        Finds all image attachments of the current message and returns a list
+        of their URLs.
+        Returns: a list of strings.
+        """
+        return [
+            link.get_attribute('href')
+            for link in self.browser.find_elements_by_tag_name('a')
+            if any(ext in link.text for ext in ['.jpg', '.jpeg', '.png'])
+        ]
