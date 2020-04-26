@@ -74,8 +74,8 @@ class AlgebraixSession(object):
         file.write(self.bodyText)
         file.close()
 
+        k = 1
         for link in self.attachments:
-            k = 1
             res = requests.get(link)
             res.raise_for_status()
             file = open(os.path.join(
@@ -83,6 +83,7 @@ class AlgebraixSession(object):
             for chunk in res.iter_content(10000):
                 file.write(chunk)
             file.close()
+            k += 1
 
     def findNext(self):
         """
