@@ -7,8 +7,7 @@ from selenium import webdriver
 class AlgebraixSession(object):
     """
     An Algebraix Session launches and controls a web browser with Selenium. It
-    provides methods to interact with the Algebraix inbox, set up directories
-    in the user’s Downloads directory, and downloads the file attachments.
+    provides methods to interact with the Algebraix inbox.
     """
 
     def __init__(self):
