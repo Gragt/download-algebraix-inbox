@@ -1,6 +1,7 @@
 import time
 
 from AlgebraixSession import AlgebraixSession
+from studentsNames import studentsNames
 
 
 def downloadAlgebraixInbox():
@@ -19,7 +20,9 @@ def downloadAlgebraixInbox():
         time.sleep(1.5)
         print("Getting name …")
         session.setSenderName()
-        print(session.senderName)
+        session.replaceSenderName(studentsNames)
+        print(f"Name is {session.senderName}")
+        session.setGroup(studentsNames)
         print("Getting body text …")
         session.setBodyText()
         print("Getting attchments …")
