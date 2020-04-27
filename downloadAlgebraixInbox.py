@@ -21,7 +21,7 @@ def downloadAlgebraixInbox():
         print("Getting name …")
         session.setSenderName()
         session.replaceSenderName(studentsNames)
-        print(f"Name is {session.senderName}")
+        print(f"Name: {session.senderName}.")
         session.setGroup(studentsNames)
         print("Getting body text …")
         session.setBodyText()
