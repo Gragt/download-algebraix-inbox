@@ -1,4 +1,5 @@
 import os
+import re
 
 import requests
 from selenium import webdriver
@@ -15,7 +16,8 @@ class AlgebraixSession(object):
         Initialises the session by opening the web browser then waits.
         """
         self.browser = webdriver.Firefox()
-        self.browser.get('https://c1-liceodelvalle.algebraix.com/')
+        self.browser.get("https://c1-liceodelvalle.algebraix.com/")
+        self.regex = re.compile(r"(.+\.\w{3,4}) \(\d+\.?\d+[KM]\)")
 
     def setSenderName(self):
         """
@@ -23,7 +25,7 @@ class AlgebraixSession(object):
         Returns: nothing.
         """
         self.senderName = self.browser.find_element_by_class_name(
-            'material-card__text--primary').text
+            "material-card__text--primary").text
 
     def replaceSenderName(self, names):
         """
@@ -43,7 +45,7 @@ class AlgebraixSession(object):
         Inputs: names, a dictionary (string: [string, [strings]])
         Returns: nothing.
         """
-        self.group = names.get(self.senderName, [''])[0]
+        self.group = names.get(self.senderName, [""])[0]
 
     def setBodyText(self):
         """
@@ -51,8 +53,8 @@ class AlgebraixSession(object):
         Returns: nothing.
         """
         self.bodyText = self.browser.find_element_by_class_name(
-            'material-card__body--paragraph.' +
-            'material-card__body--respect-lines.text-break'
+            "material-card__body--paragraph." +
+            "material-card__body--respect-lines.text-break"
         ).text
 
     def setAttachments(self):
@@ -62,9 +64,9 @@ class AlgebraixSession(object):
         Returns: nothing.
         """
         self.attachments = [
-            link.get_attribute('href')
-            for link in self.browser.find_elements_by_tag_name('a')
-            if any(ext in link.text for ext in ['.jpg', '.jpeg', '.png'])
+            link
+            for link in self.browser.find_elements_by_tag_name("a")
+            if self.regex.search(link.text)
         ]
 
     def createDownloadDirectory(self):
@@ -76,8 +78,8 @@ class AlgebraixSession(object):
         """
         self.targetPath = os.path.expanduser(
             os.path.join(
-                '~', 'Downloads', 'AlgebraixInbox',
-                f'{self.group}{self.senderName.replace(" ", "")}'))
+                "~", "Downloads", "AlgebraixInbox",
+                f"{self.group}{self.senderName.replace(' ', '')}"))
         os.makedirs(self.targetPath, exist_ok=True)
 
     def downloadFiles(self):
@@ -87,23 +89,22 @@ class AlgebraixSession(object):
         Returns: nothing.
         """
         n = 1
-        while os.path.isfile(os.path.join(self.targetPath, f'{n:02}.txt')):
+        while os.path.isfile(os.path.join(self.targetPath, f"{n:02}.txt")):
             n += 1
 
-        file = open(os.path.join(self.targetPath, f'{n:02}.txt'), 'w')
+        file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
         file.write(self.bodyText)
         file.close()
 
-        k = 1
         for link in self.attachments:
-            res = requests.get(link)
+            res = requests.get(link.get_attribute("href"))
             res.raise_for_status()
             file = open(os.path.join(
-                self.targetPath, f'{n:02}_{k:02}.jpg'), 'wb')
+                self.targetPath,
+                f"{n:02}_{self.regex.search(link.text).group(1)}"), "wb")
             for chunk in res.iter_content(10000):
                 file.write(chunk)
             file.close()
-            k += 1
 
     def findNext(self):
         """
@@ -111,9 +112,9 @@ class AlgebraixSession(object):
         the last message.
         Returns: a Selenium object or a Boolean value.
         """
-        links = self.browser.find_elements_by_class_name('X_LOAD.action-item')
+        links = self.browser.find_elements_by_class_name("X_LOAD.action-item")
         for link in links:
-            if link.get_attribute('data-original-title') == 'Next':
+            if link.get_attribute("data-original-title") == "Next":
                 return link
         return False
 
