@@ -29,12 +29,21 @@ class AlgebraixSession(object):
         """
         Checks if a name belongs to a parent and substitute it for the
         student’s name.
-        Inputs: names, a dictionary (string: list of strings)
+        Inputs: names, a dictionary (string: [string, [strings]])
         Returns: nothing.
         """
         for student, v in names.items():
             if self.senderName in v[1]:
                 self.senderName = student
+
+    def setGroup(self, names={}):
+        """
+        Checks if name belongs to a group and sets it. Set group to an empty
+        string if no group can be matched.
+        Inputs: names, a dictionary (string: [string, [strings]])
+        Returns: nothing.
+        """
+        self.group = names.get(self.senderName, [''])[0]
 
     def setBodyText(self):
         """
@@ -67,7 +76,7 @@ class AlgebraixSession(object):
         self.targetPath = os.path.expanduser(
             os.path.join(
                 '~', 'Downloads', 'AlgebraixInbox',
-                self.senderName.replace(" ", "")))
+                f'{self.group}{self.senderName.replace(" ", "")}'))
         os.makedirs(self.targetPath, exist_ok=True)
 
     def downloadFiles(self):
