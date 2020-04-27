@@ -25,7 +25,7 @@ class AlgebraixSession(object):
         self.senderName = self.browser.find_element_by_class_name(
             'material-card__text--primary').text
 
-    def replaceSenderName(self, names={}):
+    def replaceSenderName(self, names):
         """
         Checks if a name belongs to a parent and substitute it for the
         student’s name.
@@ -36,7 +36,7 @@ class AlgebraixSession(object):
             if self.senderName in v[1]:
                 self.senderName = student
 
-    def setGroup(self, names={}):
+    def setGroup(self, names):
         """
         Checks if name belongs to a group and sets it. Set group to an empty
         string if no group can be matched.
