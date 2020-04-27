@@ -25,7 +25,7 @@ def downloadAlgebraixInbox():
         session.setGroup(studentsNames)
         print("Getting body text …")
         session.setBodyText()
-        print("Getting attchments …")
+        print("Getting attachments …")
         session.setAttachments()
         print("Creating directories …")
         session.createDownloadDirectory()

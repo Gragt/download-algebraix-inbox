@@ -19,7 +19,7 @@ class AlgebraixSession(object):
 
     def setSenderName(self):
         """
-        Finds and sets the current message’s sender’s name.
+        Finds and sets the current message’s sender’s name as a class variable.
         Returns: nothing.
         """
         self.senderName = self.browser.find_element_by_class_name(
@@ -38,8 +38,8 @@ class AlgebraixSession(object):
 
     def setGroup(self, names):
         """
-        Checks if name belongs to a group and sets it. Set group to an empty
-        string if no group can be matched.
+        Checks if name belongs to a group and sets it as a class variable.
+        Sets it to an empty string if no group can be matched.
         Inputs: names, a dictionary (string: [string, [strings]])
         Returns: nothing.
         """
@@ -47,7 +47,7 @@ class AlgebraixSession(object):
 
     def setBodyText(self):
         """
-        Finds and sets the current message’s body text.
+        Finds and sets the current message’s body text as a class variable.
         Returns: nothing.
         """
         self.bodyText = self.browser.find_element_by_class_name(
@@ -58,7 +58,7 @@ class AlgebraixSession(object):
     def setAttachments(self):
         """
         Finds all of the current’s message image attachments and sets a list
-        of their URLs.
+        of their URLs as a class variable.
         Returns: nothing.
         """
         self.attachments = [
@@ -69,8 +69,9 @@ class AlgebraixSession(object):
 
     def createDownloadDirectory(self):
         """
-        Checks and create a directory tree to download files if it doesn’t
-        already exists.
+        Creates a directory tree where to download files if it doesn’t already
+        exists. If possible, target directory will be named with the student’s
+        group first.
         Returns: nothing.
         """
         self.targetPath = os.path.expanduser(
