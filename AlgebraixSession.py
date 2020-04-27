@@ -13,7 +13,7 @@ class AlgebraixSession(object):
 
     def __init__(self):
         """
-        Initialises the session by opening the web browser then waits.
+        Initialises the session by opening the web browser.
         """
         self.browser = webdriver.Firefox()
         self.browser.get("https://c1-liceodelvalle.algebraix.com/")
@@ -29,7 +29,7 @@ class AlgebraixSession(object):
 
     def replaceSenderName(self, names):
         """
-        Checks if a name belongs to a parent and substitute it for the
+        Checks if a name belongs to a parent and substitutes it for the
         student’s name.
         Inputs: names, a dictionary (string: [string, [strings]])
         Returns: nothing.
@@ -59,8 +59,8 @@ class AlgebraixSession(object):
 
     def setAttachments(self):
         """
-        Finds all of the current’s message image attachments and sets a list
-        of their URLs as a class variable.
+        Finds all of the current’s message attachments and sets a list of
+        their URLs as a class variable.
         Returns: nothing.
         """
         self.attachments = [
