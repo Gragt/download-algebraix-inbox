@@ -53,7 +53,7 @@ In Terminal, enter `brew install geckodriver`.
 
 #### Linux
 
-Use your package manager in Terminal, e.g., `sudo apt install geckodriver` in Ubuntu.
+Use your package manager in Terminal, e.g., `sudo apt install firefox-geckodriver` in Ubuntu.
 
 ## Usage
 
