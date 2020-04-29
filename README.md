@@ -14,7 +14,7 @@ In order to function properly, this programs requires the following to be instal
 
 * [Python](https://www.python.org), 3.6 or higher.
     - The `requests` and `selenium` Python modules.
-* [Firefox](www.mozilla.org/en-GB/firefox/).
+* [Firefox](https://www.mozilla.org/firefox/new/).
     - [geckodriver](https://github.com/mozilla/geckodriver/releases) for Firefox.
 
 ### Installing the `requests` and `selenium` modules
