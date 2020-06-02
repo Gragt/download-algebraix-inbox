@@ -1,7 +1,10 @@
 import time
 
 from AlgebraixSession import AlgebraixSession
-from studentsNames import studentsNames
+try:
+    from studentsNames import studentsNames
+except ModuleNotFoundError:
+    studentsNames = {}
 
 
 def downloadAlgebraixInbox():
