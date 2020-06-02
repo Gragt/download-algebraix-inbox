@@ -13,11 +13,11 @@ All downloaded files can be found in a folder named `AlgebraixInbox` inside the 
 In order to function properly, this programs requires the following to be installed:
 
 * [Python](https://www.python.org), 3.6 or higher.
-    - The `requests` and `selenium` Python modules.
+    - The `requests`, `selenium`, and `selenium-requests` Python modules.
 * [Firefox](https://www.mozilla.org/firefox/new/).
     - [geckodriver](https://github.com/mozilla/geckodriver/releases) for Firefox.
 
-### Installing the `requests` and `selenium` modules
+### Installing the `requests`, `selenium`, and `selenium-requests` modules
 
 Install Python first.
 
@@ -27,7 +27,7 @@ Open Command Prompt.
 
 (Optional: enter `python -m pip install -U pip`)
 
-Enter `pip install requests selenium`
+Enter `pip install requests selenium selenium-requests`
 
 #### macOS and Linux
 
@@ -35,9 +35,9 @@ Open Terminal.
 
 (Optional: enter `pip3 install -U pip`)
 
-Enter `pip install requests selenium`
+Enter `pip install requests selenium selenium-requests`
 
-*Note*: if you get an error, replace `pip` by `pip3`, e.g., `pip3 install requests selenium`.
+*Note*: if you get an error, replace `pip` by `pip3`, e.g., `pip3 install requests selenium selenium-requests`.
 
 ### Installing geckodriver
 
