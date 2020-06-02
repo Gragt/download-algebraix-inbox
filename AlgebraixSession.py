@@ -1,8 +1,7 @@
 import os
 import re
 
-import requests
-from selenium import webdriver
+from seleniumrequests import Firefox
 
 
 class AlgebraixSession(object):
@@ -15,7 +14,7 @@ class AlgebraixSession(object):
         """
         Initialises the session by opening the web browser.
         """
-        self.browser = webdriver.Firefox()
+        self.browser = Firefox()
         self.browser.get("https://c1-liceodelvalle.algebraix.com/")
         self.regex = re.compile(r"(.+\.\w{3,4}) \(\d+\.?\d+[KM]\)")
 
@@ -99,7 +98,7 @@ class AlgebraixSession(object):
         file.close()
 
         for link in self.attachments:
-            res = requests.get(link.get_attribute("href"))
+            res = self.browser.request("GET", link.get_attribute("href"))
             res.raise_for_status()
             file = open(os.path.join(
                 self.targetPath,
