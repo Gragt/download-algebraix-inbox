@@ -1,46 +1,55 @@
+"""
+Download all files and text from an Algebraix inbox.
+
+User is asked to log into Algebraix and navigate to the first message
+in their inbox they wish to download. Upon resuming execution, the
+program will walk down through the inbox and download each message
+body as well as any attachments.
+
+Files are saved in the user’s Downloads folder under AlgebraixInbox.
+Each message is saved in a directory named after sender’s name.If names
+have been scraped and available in students_names.py, sender’s name will
+be replaced with the student’s group and student’s name.
+"""
+
 import time
 
-from AlgebraixSession import AlgebraixSession
+from algebraix_session import AlgebraixSession
 try:
-    from studentsNames import studentsNames
+    from students_names import students_names
 except ModuleNotFoundError:
-    studentsNames = {}
+    students_names = {}
 
 
-def downloadAlgebraixInbox():
-    """
-    Create a session to log into Algebraix and download inbox’s contents.
-    Requires the user to log in and navigate to the first message. Closes the
-    browser at the end.
-    Returns: nothing.
-    """
+def download_algebraix_inbox():
+    """Create an Algebraix session and download inbox’s contents."""
     print("Opening web browser …")
     session = AlgebraixSession()
     print("Web browser open. Please, manually log into Algebraix.")
     input("Open the first message and press Enter to continue.")
-    next = session.findNext()
+    next = session.find_next()
     while True:
         time.sleep(1.5)
         print("Getting name …")
-        session.setSenderName()
-        session.replaceSenderName(studentsNames)
+        session.set_sender_name()
+        session.replace_sender_name(students_names)
         print(f"Name: {session.senderName}.")
-        session.setGroup(studentsNames)
+        session.set_group(students_names)
         print("Getting body text …")
-        session.setBodyText()
+        session.set_body_text()
         print("Getting attachments …")
-        session.setAttachments()
+        session.set_attachments()
         print("Creating directories …")
-        session.createDownloadDirectory()
+        session.create_download_directory()
         print("Downloading files …")
-        session.downloadFiles()
-        next = session.findNext()
+        session.download_files()
+        next = session.find_next()
         if not next:
             print("All done.")
             break
         print("Moving on to next message …")
         next.click()
-    session.browserClose()
+    session.browser_close()
 
 
-downloadAlgebraixInbox()
+download_algebraix_inbox()
