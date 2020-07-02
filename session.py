@@ -1,4 +1,4 @@
-"""Define AlgebraixSession object with methods."""
+"""Define AlgebraixSession class."""
 
 import os
 import re
@@ -17,7 +17,7 @@ class AlgebraixSession(object):
 
     def set_sender_name(self):
         """Find and sets current message’s sender’s name."""
-        self.senderName = self.browser.find_element_by_class_name(
+        self.sender_name = self.browser.find_element_by_class_name(
             "material-card__text--primary").text
 
     def replace_sender_name(self, names):
@@ -27,8 +27,8 @@ class AlgebraixSession(object):
         Inputs: names, a dictionary of various data types.
         """
         for student, v in names.items():
-            if self.senderName in v[1]:
-                self.senderName = student
+            if self.sender_name in v[1]:
+                self.sender_name = student
 
     def set_group(self, names):
         """
@@ -36,11 +36,11 @@ class AlgebraixSession(object):
 
         Inputs: names, a dictionary of various data types.
         """
-        self.group = names.get(self.senderName, [""])[0]
+        self.group = names.get(self.sender_name, [""])[0]
 
     def set_body_text(self):
         """Find and set current message’s body text."""
-        self.bodyText = self.browser.find_element_by_class_name(
+        self.body = self.browser.find_element_by_class_name(
             "material-card__body--paragraph." +
             "material-card__body--respect-lines.text-break"
         ).text
@@ -58,7 +58,7 @@ class AlgebraixSession(object):
         self.targetPath = os.path.expanduser(
             os.path.join(
                 "~", "Downloads", "AlgebraixInbox",
-                f"{self.group}{self.senderName.replace(' ', '')}"
+                f"{self.group}{self.sender_name.replace(' ', '')}"
             )
         )
         os.makedirs(self.targetPath, exist_ok=True)
@@ -70,7 +70,7 @@ class AlgebraixSession(object):
             n += 1
 
         file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
-        file.write(self.bodyText)
+        file.write(self.body)
         file.close()
 
         for link in self.attachments:

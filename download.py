@@ -8,17 +8,17 @@ body as well as any attachments.
 
 Files are saved in the user’s Downloads folder under AlgebraixInbox.
 Each message is saved in a directory named after sender’s name.If names
-have been scraped and available in students_names.py, sender’s name will
+have been scraped and available in names.py, sender’s name will
 be replaced with the student’s group and student’s name.
 """
 
 import time
 
-from algebraix_session import AlgebraixSession
+from session import AlgebraixSession
 try:
-    from students_names import students_names
+    from names import names
 except ModuleNotFoundError:
-    students_names = {}
+    names = {}
 
 
 def download_algebraix_inbox():
@@ -32,9 +32,9 @@ def download_algebraix_inbox():
         time.sleep(1.5)
         print("Getting name …")
         session.set_sender_name()
-        session.replace_sender_name(students_names)
-        print(f"Name: {session.senderName}.")
-        session.set_group(students_names)
+        session.replace_sender_name(names)
+        print(f"Name: {session.sender_name}.")
+        session.set_group(names)
         print("Getting body text …")
         session.set_body_text()
         print("Getting attachments …")

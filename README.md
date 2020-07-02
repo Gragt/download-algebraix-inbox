@@ -57,9 +57,9 @@ Use your package manager in Terminal, e.g., `sudo apt install firefox-geckodrive
 
 ## Usage
 
-Make sure those three files are in the same directory: `algebraix_session.py` and `download_algebraix_inbox.py`.
+Make sure those three files are in the same directory: `session.py` and `download.py`.
 
-Open your terminal, navigate to the folder where those two files are contained, and enter `python download_algebraix_inbox.py` on Windows or `python3 download_algebraix_inbox.py` on macOs and Linux.
+Open your terminal, navigate to the folder where those two files are contained, and enter `python download.py` on Windows or `python3 download.py` on macOs and Linux.
 
 If all is installed correctly, the program launches Firefox and opens the Algebraix main page. Log in with your username and password, then open your inbox and navigate to the *first* message you want downloaded. Go back to the terminal and press Enter to continue the execution. The program will control Firefox and go through each message, collecting the body of the message and all file attachments.
 
