@@ -1,4 +1,4 @@
-# downloadAlgebraixInbox
+# download_algebraix_inbox
 
 A program to download the content of an Algebraix inbox and save it in a directory tree.
 
@@ -57,10 +57,10 @@ Use your package manager in Terminal, e.g., `sudo apt install firefox-geckodrive
 
 ## Usage
 
-Make sure those three files are in the same directory: `AlgebraixSession.py` and `downloadAlgebraixInbox.py`.
+Make sure those three files are in the same directory: `algebraix_session.py` and `download_algebraix_inbox.py`.
 
-Open your terminal, navigate to the folder where those two files are contained, and enter `python downloadAlgebraixInbox.py` on Windows or `python3 downloadAlgebraixInbox.py` on macOs and Linux.
+Open your terminal, navigate to the folder where those two files are contained, and enter `python download_algebraix_inbox.py` on Windows or `python3 download_algebraix_inbox.py` on macOs and Linux.
 
 If all is installed correctly, the program launches Firefox and opens the Algebraix main page. Log in with your username and password, then open your inbox and navigate to the *first* message you want downloaded. Go back to the terminal and press Enter to continue the execution. The program will control Firefox and go through each message, collecting the body of the message and all file attachments.
 
-It automatically creates a folder named `AlgebraixInbox` in the current user’s `Downloads` folder, in which it will create a folder for each sender. If `studentsNames.py` is present, the program will attempt to substitute the sender’s name for the student’s name and corresponding group, e.g., a message from a student named Luis Miguel from group 1B will be found in `~/Downloads/AlgebraixInbox/1BLuisMiguel`. The first message from a sender will be given the number 01, the second 02, etc. The number will be affixed to file names, e.g., the body of the second message will be named 02.txt and the attached image.jpg file will be renamed 02_image.jpg.
+It automatically creates a folder named `AlgebraixInbox` in the current user’s `Downloads` folder, in which it will create a folder for each sender. If `students_names.py` is present, the program will attempt to substitute the sender’s name for the student’s name and corresponding group, e.g., a message from a student named Luis Miguel from group 1B will be found in `~/Downloads/AlgebraixInbox/1BLuisMiguel`. The first message from a sender will be given the number 01, the second 02, etc. The number will be affixed to file names, e.g., the body of the second message will be named 02.txt and the attached image.jpg file will be renamed 02_image.jpg.
