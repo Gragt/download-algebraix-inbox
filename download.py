@@ -30,7 +30,7 @@ class AlgebraixSession(object):
     def __init__(self):
         """Initialise the session by opening the web browser."""
         self.browser = Firefox()
-        self.browser.get("https://c1-liceodelvalle.algebraix.com/")
+        self.browser.get("https://c1-summit.algebraix.com/")
         self.regex = re.compile(r"(.+\.\w{3,4}) \(\d+\.?\d+[KM]\)")
 
     def set_sender_name(self):
