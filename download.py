@@ -76,7 +76,7 @@ class AlgebraixSession(object):
         self.targetPath = os.path.expanduser(
             os.path.join(
                 "~", "Downloads", "AlgebraixInbox",
-                f"{self.group}{self.sender_name.replace(' ', '')}"
+                f"{self.group}{self.sender_name.title().replace(' ', '')}"
             )
         )
         os.makedirs(self.targetPath, exist_ok=True)
@@ -132,7 +132,7 @@ def download_algebraix_inbox():
         print("Getting name …")
         session.set_sender_name()
         session.replace_sender_name(names)
-        print(f"Name: {session.sender_name}.")
+        print(f"Name: {session.sender_name.title()}.")
         session.set_group(names)
         print("Getting body text …")
         session.set_body_text()
