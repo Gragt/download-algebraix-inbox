@@ -58,10 +58,13 @@ class AlgebraixSession(object):
 
     def set_body_text(self):
         """Find and set current message’s body text."""
-        self.body = self.browser.find_element_by_class_name(
+        self.body = []
+        for item in self.browser.find_elements_by_class_name(
             "material-card__body--paragraph." +
             "material-card__body--respect-lines.text-break"
-        ).text
+        ):
+            self.body.append(item.text + "\n\n")
+        self.body[-1] = self.body[-1][:-3]
 
     def set_attachments(self):
         """Set a list of attachments for current message."""
@@ -88,7 +91,8 @@ class AlgebraixSession(object):
             n += 1
 
         file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
-        file.write(self.body)
+        for item in self.body:
+            file.write(item)
         file.close()
 
         for link in self.attachments:
