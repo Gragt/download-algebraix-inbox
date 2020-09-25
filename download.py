@@ -66,6 +66,13 @@ class AlgebraixSession(object):
             self.body.append(item.text + "\n\n")
         self.body[-1] = self.body[-1][:-3]
 
+    def set_dates(self):
+        """Find and set date and time for each message."""
+        self.date = [
+            date.text for date in self.browser.find_elements_by_class_name(
+                "material-card__body--title-secondary")
+        ]
+
     def set_attachments(self):
         """Set a list of attachments for current message."""
         self.attachments = [
@@ -155,4 +162,4 @@ def download_algebraix_inbox():
     session.browser_close()
 
 
-download_algebraix_inbox()
+# download_algebraix_inbox()
