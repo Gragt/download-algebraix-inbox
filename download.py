@@ -33,10 +33,13 @@ class AlgebraixSession(object):
         self.browser.get("https://c1-summit.algebraix.com/")
         self.regex = re.compile(r"(.+\.\w{3,4}) \(\d+\.?\d+[KM]\)")
 
-    def set_sender_name(self):
+    def set_names(self):
         """Find and sets current message’s sender’s name."""
-        self.sender_name = self.browser.find_element_by_class_name(
-            "material-card__text--primary").text
+        self.names = [
+            name.text for name in self.browser.find_elements_by_class_name(
+                "material-card__text--primary")
+        ]
+        self.sender_name = self.names[0]
 
     def replace_sender_name(self, names):
         """
