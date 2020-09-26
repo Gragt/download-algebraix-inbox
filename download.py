@@ -102,7 +102,7 @@ class AlgebraixSession(object):
 
         file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
         for name, date, body in zip(self.names, self.dates, self.bodies):
-            file.write(name + "\n" + date + "\n" + body.title())
+            file.write(name.title() + "\n" + date + "\n" + body)
         file.close()
 
         for link in self.attachments:
