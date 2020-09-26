@@ -144,11 +144,12 @@ def download_algebraix_inbox():
     while True:
         time.sleep(1.5)
         print("Getting name …")
-        session.set_sender_name()
+        session.set_names()
         session.replace_sender_name(names)
         print(f"Name: {session.sender_name.title()}.")
         session.set_group(names)
         print("Getting body text …")
+        session.set_dates()
         session.set_body_text()
         print("Getting attachments …")
         session.set_attachments()
@@ -165,4 +166,4 @@ def download_algebraix_inbox():
     session.browser_close()
 
 
-# download_algebraix_inbox()
+download_algebraix_inbox()
