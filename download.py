@@ -71,7 +71,7 @@ class AlgebraixSession(object):
 
     def set_dates(self):
         """Find and set date and time for each message."""
-        self.date = [
+        self.dates = [
             date.text for date in self.browser.find_elements_by_class_name(
                 "material-card__body--title-secondary")
         ]
@@ -101,8 +101,8 @@ class AlgebraixSession(object):
             n += 1
 
         file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
-        for item in self.body:
-            file.write(item)
+        for name, date, body in zip(self.names, self.dates, self.body):
+            file.write(name + "\n" + date + "\n" + body.title())
         file.close()
 
         for link in self.attachments:
