@@ -59,15 +59,15 @@ class AlgebraixSession(object):
         """
         self.group = names.get(self.sender_name, [""])[0]
 
-    def set_body_text(self):
+    def set_bodies(self):
         """Find and set current message’s body text."""
-        self.body = []
+        self.bodies = []
         for item in self.browser.find_elements_by_class_name(
             "material-card__body--paragraph." +
             "material-card__body--respect-lines.text-break"
         ):
-            self.body.append(item.text + "\n\n")
-        self.body[-1] = self.body[-1][:-3]
+            self.bodies.append(item.text + "\n\n")
+        self.bodies[-1] = self.bodies[-1][:-3]
 
     def set_dates(self):
         """Find and set date and time for each message."""
@@ -101,7 +101,7 @@ class AlgebraixSession(object):
             n += 1
 
         file = open(os.path.join(self.targetPath, f"{n:02}.txt"), "w")
-        for name, date, body in zip(self.names, self.dates, self.body):
+        for name, date, body in zip(self.names, self.dates, self.bodies):
             file.write(name + "\n" + date + "\n" + body.title())
         file.close()
 
@@ -150,7 +150,7 @@ def download_algebraix_inbox():
         session.set_group(names)
         print("Getting body text …")
         session.set_dates()
-        session.set_body_text()
+        session.set_bodies()
         print("Getting attachments …")
         session.set_attachments()
         print("Creating directories …")
