@@ -123,7 +123,7 @@ class AlgebraixSession(object):
 
         Returns: a Selenium object or a bool.
         """
-        links = self.browser.find_elements_by_class_name("X_LOAD.action-item")
+        links = self.browser.find_elements_by_class_name("action-item")
         for link in links:
             if link.get_attribute("data-original-title") == "Next":
                 return link
